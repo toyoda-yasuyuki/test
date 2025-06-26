@@ -7,7 +7,12 @@
 </head>
 <body>
     <script>
-        location.href = "jp.co.mc-ubs.mozo.deeplink://userInfoInput" + location.search;
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+            location.href = "jp.co.mc-ubs.mozo://userInfoInput" + location.search;
+        } else {
+            location.href = "jp.co.mc-ubs.mozo.deeplink://userInfoInput" + location.search;
+        }
     </script>
 </body>
 </html>
