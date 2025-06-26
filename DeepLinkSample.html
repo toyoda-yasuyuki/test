@@ -7,7 +7,25 @@
 </head>
 <body>
     <script>
-        location.href = "jp.co.mc-ubs.mozo.deeplink://userInfoInput" + location.search;
+        function isIOS() {
+          try {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const platform = navigator.platform;
+
+            const iOSPlatforms = ['iPhone', 'iPad', 'iPod', 'iPhone Simulator', 'iPad Simulator', 'iPod Simulator'];
+            const isTouchMac = ua.includes('Mac') && 'ontouchend' in document;
+
+            return iOSPlatforms.includes(platform) || isTouchMac;
+          } catch (e) {
+            return false;
+          }
+        }
+
+        if (isIOS()) {
+            location.href = "jp.co.mc-ubs.mozo://userInfoInput" + location.search;
+        } else {
+            location.href = "jp.co.mc-ubs.mozo.deeplink://userInfoInput" + location.search;
+        }
     </script>
 </body>
 </html>
