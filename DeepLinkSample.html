@@ -7,8 +7,21 @@
 </head>
 <body>
     <script>
-        const ua = navigator.userAgent || navigator.vendor || window.opera;
-        if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+        function isStrictIOS() {
+          try {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const platform = navigator.platform;
+
+            const iOSPlatforms = ['iPhone', 'iPad', 'iPod', 'iPhone Simulator', 'iPad Simulator', 'iPod Simulator'];
+            const isTouchMac = ua.includes('Mac') && 'ontouchend' in document;
+
+            return iOSPlatforms.includes(platform) || isTouchMac;
+          } catch (e) {
+            return false;
+          }
+        }
+
+        if (isStrictIOS()) {
             location.href = "jp.co.mc-ubs.mozo://userInfoInput" + location.search;
         } else {
             location.href = "jp.co.mc-ubs.mozo.deeplink://userInfoInput" + location.search;
