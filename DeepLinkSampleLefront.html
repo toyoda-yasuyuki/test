@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <script>
+        function isIOS() {
+          try {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const platform = navigator.platform;
+
+            const iOSPlatforms = ['iPhone', 'iPad', 'iPod', 'iPhone Simulator', 'iPad Simulator', 'iPod Simulator'];
+            const isTouchMac = ua.includes('Mac') && 'ontouchend' in document;
+
+            return iOSPlatforms.includes(platform) || isTouchMac;
+          } catch (e) {
+            return false;
+          }
+        }
+
+        if (isIOS()) {
+            location.href = "jp.co.mc-ubs.lefront://userInfoInput" + location.search;
+        } else {
+            location.href = "jp.co.mc-ubs.lefront.deeplink://userInfoInput" + location.search;
+        }
+    </script>
+</body>
+</html>
